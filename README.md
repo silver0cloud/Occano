@@ -1,4 +1,4 @@
-# Open TTS Studio
+# Occano 
 
 **Clone your voice in three minutes. Entirely on your machine. No cloud, no APIs.**
 
