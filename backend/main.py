@@ -322,11 +322,32 @@ async def ws_train(websocket: WebSocket):
                 "message": "Found existing checkpoint — resuming training.",
             })
 
+        # Send immediate message — model load takes 10-30s and WS times out without this
+        await websocket.send_json({
+            "status": "loading",
+            "message": "Loading F5-TTS model into memory...",
+        })
+
         loop = asyncio.get_event_loop()
         queue: asyncio.Queue = asyncio.Queue()
 
+        # Periodic heartbeat keeps WS alive during slow model load
+        async def heartbeat():
+            count = 0
+            while True:
+                await asyncio.sleep(5)
+                count += 1
+                try:
+                    await websocket.send_json({
+                        "status": "loading",
+                        "message": f"Loading model... ({count * 5}s)",
+                    })
+                except Exception:
+                    break
+
+        heartbeat_task = asyncio.create_task(heartbeat())
+
         def on_progress(progress: TrainingProgress):
-            # Called from sync training thread — push into async queue safely
             asyncio.run_coroutine_threadsafe(queue.put(progress.to_dict()), loop)
 
         async def run_training():
@@ -334,14 +355,21 @@ async def ws_train(websocket: WebSocket):
                 await loop.run_in_executor(None, lambda: trainer.train(on_progress=on_progress))
                 await queue.put({"status": "complete"})
             except Exception as e:
-                await queue.put({"status": "error", "message": str(e)})
+                import traceback
+                err = traceback.format_exc()
+                print(f"[ws_train] Training crashed:\n{err}")
+                await queue.put({"status": "error", "message": str(e), "traceback": err})
 
         training_task = asyncio.create_task(run_training())
 
+        first_msg = True
         while True:
             msg = await queue.get()
+            if first_msg:
+                heartbeat_task.cancel()  # Stop heartbeat once real progress starts
+                first_msg = False
             await websocket.send_json(msg)
-            if msg.get("status") == "complete":
+            if msg.get("status") in ("complete", "error"):
                 break
 
         await training_task
