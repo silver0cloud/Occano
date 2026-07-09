@@ -2,7 +2,7 @@
 
 **Clone your voice in three minutes. Entirely on your machine. No cloud, no APIs.**
 
-Open TTS Studio is an open-source desktop application that lets anyone record their voice and fine-tune a personal text-to-speech model using [F5-TTS](https://github.com/SWivid/F5-TTS). The goal is to make high-quality, personalised TTS accessible to non-technical users while keeping all processing local and private.
+Occano is an open-source desktop application that lets anyone record their voice and fine-tune a personal text-to-speech model using [F5-TTS](https://github.com/SWivid/F5-TTS). The goal is to make high-quality, personalised TTS accessible to non-technical users while keeping all processing local and private.
 
 ---
 
@@ -137,7 +137,7 @@ The sidecar binary is automatically named `tts-backend-<target-triple>` by `buil
 ## Project structure
 
 ```
-open-tts-studio/
+occano/
 ├── backend/                        Python FastAPI backend
 │   ├── main.py                       REST + WebSocket API (20 routes)
 │   ├── recorder.py                   Press-hold mic recording, take management
@@ -290,17 +290,6 @@ Contributions are very welcome. A few areas where help is especially valuable:
 1. Add sentences to `curated_script.json` with the new language tag
 2. Find or train a multilingual F5-TTS checkpoint (see [SHARED.md](https://github.com/SWivid/F5-TTS/blob/main/src/f5_tts/infer/SHARED.md))
 3. Update `VOCAB_HF` and `BASE_MODEL_HF` in `trainer.py` / `inference.py`
-
----
-
-## Roadmap
-
-- [ ] Docker Compose for contributor onboarding
-- [ ] Multiple voice profiles per user
-- [ ] Export to ONNX for edge deployment
-- [ ] Multilingual support (starting with Hindi, Spanish)
-- [ ] Longer recording sessions (10+ min for higher accuracy)
-- [ ] Evaluation metrics (MOS, speaker similarity score)
 
 ---
 
