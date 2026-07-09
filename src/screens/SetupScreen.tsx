@@ -57,7 +57,7 @@ export default function SetupScreen() {
       <span className="eyebrow">First time setup</span>
       <h1>Downloading voice model</h1>
       <p className="lead">
-        Open TTS Studio needs to download the F5-TTS base model (~1.3 GB).
+        Occano needs to download the F5-TTS base model (~1.3 GB).
         This happens once — future launches will skip this step.
       </p>
 
