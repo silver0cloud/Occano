@@ -47,7 +47,7 @@ from inference import TTSInferenceEngine, detect_device
 # App setup
 # ---------------------------------------------------------------------------
 
-app = FastAPI(title="Open TTS Studio API", version="1.0.0")
+app = FastAPI(title="Occano API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
