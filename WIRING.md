@@ -1,4 +1,4 @@
-# Open TTS Studio — Wiring Guide
+# Occano — Wiring Guide
 
 ## Development (fast iteration, no sidecar build needed)
 
