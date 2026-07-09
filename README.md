@@ -20,13 +20,13 @@ Open TTS Studio is an open-source desktop application that lets anyone record th
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     Tauri Desktop App                        │
-│  ┌──────────────────────┐     ┌─────────────────────────────┐ │
+┌───────────────────────────────────────────────────────────────┐
+│                     Tauri Desktop App                         │
+│  ┌───────────────────────┐    ┌─ ───────────────────────────┐ │
 │  │   React Frontend      │    │   Python FastAPI Backend    │ │
 │  │   (4 screens)         │◄──►│   (sidecar process)         │ │
 │  │   Zustand state       │    │                             │ │
-│  └──────────────────────┘     │  audio_processor/           │ │
+│  └───────────────────────┘    │  audio_processor/           │ │
 │                               │    recorder.py              │ │
 │  WebSocket streams:           │    validator.py             │ │
 │    /ws/train  (live loss)     │    cleaner.py               │ │
@@ -35,7 +35,7 @@ Open TTS Studio is an open-source desktop application that lets anyone record th
 │                               │  trainer.py (F5-TTS LoRA)   │ │
 │                               │  inference.py (streaming)   │ │
 │                               └─────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────────┘
 ```
 
 **User flow:**
