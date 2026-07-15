@@ -2,9 +2,7 @@
 
 # Occano
 
-**Clone your voice in three minutes — entirely on your machine.**
-
-*No cloud. No APIs. No data leaving your computer.*
+**Clone your voice in three minutes. Entirely on your machine. No cloud, no APIs.**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
@@ -35,20 +33,20 @@ Occano is an open-source desktop application that lets anyone record their voice
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │                      Tauri Desktop App                       │
-│                                                                │
+│                                                              │
 │   ┌────────────────────┐          ┌───────────────────────┐  │
-│   │   React Frontend    │  ◄────►  │  Python FastAPI       │  │
-│   │   (4 screens)        │          │  Backend (sidecar)    │  │
-│   │   Zustand state       │          │                       │  │
+│   │   React Frontend   │  ◄────►  │  Python FastAPI       │  │
+│   │   (4 screens)      │          │  Backend (sidecar)    │  │
+│   │   Zustand state    │          │                       │  │
 │   └────────────────────┘          │  audio_processor/     │  │
-│                                     │    recorder.py         │  │
-│   WebSocket streams:                │    validator.py        │  │
-│     /ws/train  (live loss)          │    cleaner.py           │  │
-│     /ws/speak  (audio chunks)       │    segmenter.py         │  │
-│                                     │  voice_encoder.py (QC) │  │
-│                                     │  trainer.py (LoRA)      │  │
-│                                     │  inference.py (stream)  │  │
-│                                     └───────────────────────┘  │
+│                                   |  recorder.py          │  │
+│   WebSocket streams:              |  validator.py         │  │
+│     /ws/train  (live loss)        |  cleaner.py           │  │
+│     /ws/speak  (audio chunks)     |  segmenter.py         │  │
+│                                   |  voice_encoder.py (QC)│  │
+│                                   |  trainer.py (LoRA)    │  │
+│                                   |  inference.py (stream)│  │
+│                                   └───────────────────────┘  │
 └──────────────────────────────────────────────────────────────┘
 ```
 
