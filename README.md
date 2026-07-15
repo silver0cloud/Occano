@@ -114,7 +114,7 @@ npm run dev
 ```
 
 **Terminal 2 (alternative) — Full Tauri shell**
-**For running the desktop app-** Run the following commands in the terminal 2 in place of React frontend.
+### **For running the desktop app-** Run the following commands in the terminal 2 in place of React frontend.
 
 ```bash
 npm install
